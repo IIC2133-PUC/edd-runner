@@ -1,6 +1,6 @@
 install:
 	@echo "Installing edd-runner to /usr/local/bin"
-	@cp edd_runner.sh /usr/local/bin/edd-runner
+	@cp setup/install.sh /usr/local/bin/edd-runner
 	@chmod +x /usr/local/bin/edd-runner
 	@echo "Installation complete"
 
@@ -11,7 +11,7 @@ uninstall:
 
 update:
 	@echo "Updating edd-runner to /usr/local/bin"
-	@cp edd_runner.sh /usr/local/bin/edd-runner
+	@cp setup/install.sh /usr/local/bin/edd-runner
 	@chmod +x /usr/local/bin/edd-runner
 	@echo "Update complete"
 
