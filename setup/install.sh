@@ -28,4 +28,15 @@ if [ $? -ne 0 ]; then
     echo "edd-runner instalado."
 fi
 
-docker run --rm -v $(pwd):/runner -w /runner carlogauss33/edd-runner $command $@
+run_command() {
+    docker run --rm -v $(pwd):/runner -w /runner carlogauss33/edd-runner sh -c "$1"
+}
+
+if [ -f Makefile ]; then
+    echo "Re compilando..."
+    run_command "make clean > /dev/null 2>&1"
+    run_command "make > /dev/null 2>&1"
+    echo "Compilado, ejecutando...\n\n"
+fi
+
+run_command $command $@ 2>&1
