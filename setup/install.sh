@@ -1,6 +1,5 @@
 image=carlogauss33/edd-runner
-command=$1
-shift
+command=$@
 
 if [ -z "$command" ] || [ "$command" = "help" ]; then
     echo "Uso: edd-runner <comando> [argumentos]"
@@ -21,7 +20,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-docker image inspect $image > /dev/null 2>&1
+docker pull $image > /dev/null 2>&1
 if [ $? -ne 0 ]; then
     echo "edd-runner no esta instalado. Instalando..."
     docker pull $image
@@ -29,7 +28,7 @@ if [ $? -ne 0 ]; then
 fi
 
 run_command() {
-    docker run --rm -v $(pwd):/runner -w /runner carlogauss33/edd-runner sh -c "$1"
+    docker run --rm -v $(pwd):/runner -w /runner carlogauss33/edd-runner bash -c "$1"
 }
 
 if [ -f Makefile ]; then
@@ -39,4 +38,4 @@ if [ -f Makefile ]; then
     echo "Compilado, ejecutando...\n\n"
 fi
 
-run_command $command $@ 2>&1
+run_command "$command"
