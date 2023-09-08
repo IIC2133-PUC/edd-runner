@@ -28,7 +28,7 @@ if [ $? -ne 0 ]; then
 fi
 
 run_command() {
-    docker run --rm -v $(pwd):/runner -w /runner carlogauss33/edd-runner bash -c "$1"
+    docker run --rm -v "$(pwd):/runner" -w /runner carlogauss33/edd-runner bash -c "$1"
 }
 
 if [ -f Makefile ]; then
